@@ -4,19 +4,19 @@
 
 # The Funniest Sick-Day Excuse
 
-**Concept (winner of the 3-variant concept test, 43/50):** a sneeze so violent it throws the sender's back out, leaving them flat on the floor negotiating with their robot vacuum — and losing. Half believable (a sneeze really can throw a back out), fresh (no fever, no dog, no dead grandma), one read, punchline on the last two words, sounds like a real text message to a boss.
+**Concept (winner of the 3-variant concept test, 46/50):** the sender's back goes out while tying a shoe and "officially files for early retirement" — and HR, of all people, respects its decision. Half believable (a back really can go out tying a shoe), fresh (no fever, no dog, no dead grandma), one read, punchline on the last clause, sounds like a real text message to a boss.
 
-The entry, exactly as written to `/output/entry.txt` (119 characters, 121 bytes, one line):
+The entry, exactly as written to `/output/entry.txt` (148 characters, 150 bytes, one line, no trailing newline):
 
-> can't make it in — i sneezed so hard my back went out and now i'm flat on the floor negotiating with my roomba. it won.
+> My back went out while I was tying my shoe and has officially filed for early retirement — HR says I have to respect its decision, so I'm out today.
 
 ## Why this line
 
-- **Half believable, gets the laugh:** sneezing your back out is a real thing people do; the boss half believes it while the office laughs at the roomba negotiation.
-- **Fresh idea:** no worn excuse about a fever, a dog, or a dead grandmother — a robot vacuum as the opponent is a specific, modern, verifiable detail.
-- **Lands in one read:** the twist ("it won.") arrives in the last two words.
-- **Sounds like a real person typing:** lowercase, one breath, no setup-punchline scaffolding.
-- **No wasted words:** every clause is doing work — the sneeze (cause), the back (consequence), the floor (scene), the roomba (opponent), "it won" (punchline).
+- **Half believable, gets the laugh:** tying a shoe and throwing your back out is a real thing people do; the boss half believes it while the office laughs at HR siding with the back.
+- **Fresh idea:** no worn excuse about a fever, a dog, or a dead grandmother — a back filing for early retirement is a specific, surprising personification.
+- **Lands in one read:** the twist ("HR says I have to respect its decision") arrives in the last clause, and the day off lands in the final words.
+- **Sounds like a real person typing:** one breath, plain words, no setup-punchline scaffolding, no joke built for a contest.
+- **No wasted words:** every clause is doing work — the shoe (cause), the back (consequence), early retirement (twist), HR (authority gag), "I'm out today" (the day off).
 
 ## Concept test (3 variants, scored /50)
 
@@ -24,21 +24,28 @@ Scored on the judge's five criteria — half believable + laugh, fresh idea, lan
 
 | Variant | Score | Verdict |
 |---|---|---|
-| Cat learned to open doors, locked me in the bathroom: "please send help, not HR" | 39 | Believable stretch, cat trope is familiar |
-| Elevator stopped with a violinist: "now we're legally a band. first gig is at noon" | 40 | Freshest idea, but reads like a constructed joke |
-| **Sneeze threw my back out, negotiating with my roomba: "it won"** | **43** | **Winner — most believable, real-person voice, punchline last** |
+| I sneezed in my sleep and threw my back out — I can only move in 15-minute increments now, like a Windows update. | 42 | Strong twist, but the Windows-update gag is a familiar trope |
+| I slept wrong and woke up with a neck that only turns left — I've agreed to three things I don't remember this morning and I can't risk a fourth. | 44 | Great final twist, slightly less believable than the winner |
+| **My back went out while I was tying my shoe and has officially filed for early retirement — HR says I have to respect its decision, so I'm out today.** | **46** | **Winner — most specific, freshest twist, real-person voice** |
 
-Standout gate passed: specific (sneeze → back → roomba), surprising (the vacuum wins), readable in ~2 seconds. No banned trope (fever, dog, dead grandma) in any variant.
+Standout gate passed: specific (shoe → back → early retirement → HR), surprising (HR respects the back's decision), readable in ~2 seconds. No banned trope (fever, dog, dead grandma) in any variant.
 
 ## How it runs
 
-`main.ts` (Node 22) writes the excuse — and nothing else — to `/output/entry.txt`, with no trailing newline, and self-checks the gate before writing: 1–200 characters, one non-blank line. Run it locally:
+`main.ts` (Node 22) writes the excuse — and nothing else — to `/output/entry.txt`, with no trailing newline, and self-checks the gate before writing: 1–200 characters, one non-blank line, no leading/trailing whitespace, plus a round-trip check that the file on disk is byte-identical to the entry. Run it locally:
 
 ```sh
 node main.ts
 ```
 
-It prints the character and byte count it wrote (119 chars, 121 bytes).
+It prints the character and byte count it wrote (148 chars, 150 bytes). Two runs produce byte-identical output.
+
+## Verification (local, 27 Nov 2026)
+
+- `node main.ts` → `wrote /output/entry.txt: 148 chars, 150 bytes, 1 line`
+- `/output/entry.txt` read back: 148 chars, 150 bytes, 1 line, no trailing newline, byte-identical to the concept line above
+- Two consecutive runs: byte-identical (`cmp` clean)
+- Gate: 148 is inside the sealed scorer's 1–200 character window
 
 ## Bounty
 
